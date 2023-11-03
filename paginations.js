@@ -43,6 +43,7 @@ btnsFilter.on("click", (e) => {
     articles = $(articlesSelector).filter(`[data-filter="${filterName}"]`);
     // show with fade effect
     articles.slice(0, itemsPerPage).fadeIn();
+    currentPage = 1;
     updateCounter();
 });
 
