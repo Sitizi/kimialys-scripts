@@ -37,9 +37,16 @@ nextBtn.on("click", () => {
 });
 
 btnsFilter.on("click", (e) => {
+    // remove all style css from buttons
+    btnsFilter.removeAttr("style");
     // get value of attribute data-filter
     const filterName = e.target.getAttribute("data-filter");
+    const filterColor = e.target.getAttribute("data-color");
     if (!filterName || !filterName.length) return;
+
+    e.target.parentElement.style.backgroundColor = filterColor;
+    e.target.parentElement.style.color = "#fff";
+
     articles.hide();
     articles = $(articlesSelector).filter(`[data-filter="${filterName}"]`);
     // show with fade effect
@@ -53,12 +60,28 @@ clearBtn.on("click", () => {
     articles = $(articlesSelector);
     // uncheck all radio buttons
     $("input[type=radio]").prop("checked", false);
+    btnsFilter.removeAttr("style");
     articles.slice(0, itemsPerPage).fadeIn();
     updateCounter();
 });
 
 function updateCounter() {
     const maxPages = Math.ceil(articles.length / itemsPerPage);
+
+    // if current page is 1 add btn-disabled class to prevBtn
+    if (currentPage === 1) {
+        prevBtn.addClass("btn-disabled");
+    } else {
+        prevBtn.removeClass("btn-disabled");
+    }
+
+    // if current page is last add btn-disabled class to nextBtn
+    if (currentPage === maxPages) {
+        nextBtn.addClass("btn-disabled");
+    } else {
+        nextBtn.removeClass("btn-disabled");
+    }
+
     // clean pagination
     counter.empty();
     for (let i = 0; i < maxPages; i++) {
