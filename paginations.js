@@ -5,7 +5,7 @@ const prevBtn = $(".btn-prev");
 const nextBtn = $(".btn-next");
 const clearBtn = $(".btn-filter-clear-paragraph");
 const counter = $(".pagination-counter");
-const itemsPerPage = 4;
+const itemsPerPage = 6;
 let currentPage = 1;
 const btnsFilter = $(".btn-filter-blog");
 
